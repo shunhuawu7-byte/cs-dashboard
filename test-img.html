@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="referrer" content="no-referrer">
+<title>Image Test</title>
+<style>body{font-family:sans-serif;padding:20px}img{max-width:400px;border:2px solid #333;margin:10px 0}
+.green{color:green}.red{color:red}</style></head><body>
+<h2>JD CDN Image Load Test</h2>
+<p>Meta: <code>&lt;meta name="referrer" content="no-referrer"&gt;</code></p>
+<p>If you can see the images below, the fix works:</p>
+<div id="status"></div>
+<img src="https://dd-static.jd.com/ddimg/jfs/t1/444363/34/18841/5100/6a2ad6c1Fb9bb2756/022f0d1068316628.jpg"
+     referrerpolicy="no-referrer"
+     onload="document.getElementById('status').innerHTML='<span class=green>Image 1 LOADED OK</span>'"
+     onerror="document.getElementById('status').innerHTML='<span class=red>Image 1 FAILED: ' + new Date() + '</span>'">
+<br>
+<img src="https://dd-static.jd.com/ddimg/jfs/t1/457054/24/2025/33984/6a2ad745Fc0d8ece1/022f29b141225cd6.jpg"
+     referrerpolicy="no-referrer"
+     onload="document.getElementById('status').innerHTML+='<br><span class=green>Image 2 LOADED OK</span>'"
+     onerror="document.getElementById('status').innerHTML+='<br><span class=red>Image 2 FAILED</span>'">
+<br>
+<img src="https://dd-static.jd.com/ddimgp/jfs/t20270716/452135/2/9361/49322/6a2ac991F59380286/09361683180f9378.jpg"
+     referrerpolicy="no-referrer"
+     onload="document.getElementById('status').innerHTML+='<br><span class=green>Image 3 LOADED OK</span>'"
+     onerror="document.getElementById('status').innerHTML+='<br><span class=red>Image 3 FAILED</span>'">
+</body></html>
