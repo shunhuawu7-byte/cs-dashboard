@@ -558,6 +558,16 @@ function openChatModal(detailIdx) {
     modalBody.innerHTML = '<div class="empty">暂未找到该会话的聊天记录</div>';
   } else {
     var html = '';
+    // DEBUG: hardcoded test image to verify rendering pipeline
+    html += '<div style="background:#e8f5e9;padding:10px;border-radius:8px;margin-bottom:12px;font-size:12px;">';
+    html += '<strong>🖼 图片渲染测试:</strong> 如果下面能看到图 → 渲染通道正常；看不到 → 网络/域名屏蔽问题<br>';
+    html += '<a href="https://dd-static.jd.com/ddimg/jfs/t1/444363/34/18841/5100/6a2ad6c1Fb9bb2756/022f0d1068316628.jpg" target="_blank">';
+    html += '<img src="https://dd-static.jd.com/ddimg/jfs/t1/444363/34/18841/5100/6a2ad6c1Fb9bb2756/022f0d1068316628.jpg" ';
+    html += 'referrerpolicy="no-referrer" style="max-width:200px;border:2px solid #4caf50;display:block;margin:6px 0;" ';
+    html += 'onload="this.style.border=\'3px solid #4caf50\';this.nextElementSibling.textContent=\'✅ 测试图加载成功\';" ';
+    html += 'onerror="this.style.display=\'none\';this.nextElementSibling.textContent=\'❌ 测试图加载失败 - 京东CDN屏蔽了GitHub Pages域名\';">';
+    html += '<span style="font-size:11px;color:#999;">加载中...</span></a>';
+    html += '</div>';
     html += '<div style="margin-bottom:12px;font-size:13px;color:#666;background:#f8f9fa;padding:10px;border-radius:6px;">';
     html += '<strong>客服:</strong> ' + escHtml(detail['客服']);
     if (detail['转接后客服']) html += ' | <strong>转接后:</strong> ' + escHtml(detail['转接后客服']);
@@ -576,6 +586,14 @@ function openChatModal(detailIdx) {
       html += '会话时间: ' + escHtml(session.start_time || '') + ' ~ ' + escHtml(session.end_time || '');
       html += ' | 来源: ' + escHtml(session.source_log || '');
       html += ' | 消息: ' + (session.message_count || 0) + '条';
+      // Count images in this session
+      var imgCount = 0;
+      (session.messages || []).forEach(function(m) {
+        var c = m.content || '';
+        var imgs = c.match(/(https?:\/\/[^\s]+\.(jpg|jpeg|png|gif|webp|bmp))(?:\?[^\s]*)?/gi);
+        if (imgs) imgCount += imgs.length;
+      });
+      html += ' | 图片: ' + imgCount + '张';
       html += '</div>';
 
       var agentList = session.agents || [];
