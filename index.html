@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
 <title>客服数据可视化 V3 - 2026-06-11</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -592,7 +593,7 @@ function openChatModal(detailIdx) {
 
         // Detect and render image URLs
         content = content.replace(/(https?:\/\/[^\s]+\.(jpg|jpeg|png|gif|webp)(\?[^\s]*)?)/gi, function(match) {
-          return '<br><img src="' + match + '" alt="img" style="max-width:200px;border-radius:6px;" loading="lazy"><br>';
+          return '<br><img src="' + match + '" alt="img" referrerpolicy="no-referrer" style="max-width:200px;border-radius:6px;" loading="lazy"><br>';
         });
 
         html += '<div class="chat-msg ' + cls + '">';
